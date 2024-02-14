@@ -1,16 +1,16 @@
-import { transferFile as transferFile2, _parseHmPath } from "@cuberqaq/transfer-file-side";
-import * as cbFS from "@cuberqaq/fs-side";
+// import { transferFile, _parseHmPath } from "@cuberqaq/transfer-file-side";
+// import * as cbFS from "@cuberqaq/fs-side";
 // import { network } from "@cuberqaq/network-side";
-import { image as image2 } from "@cuberqaq/image-side";
+// import { image as image2 } from "@cuberqaq/image-side";
 function getFileName(tileX, tileY, zoom) {
   return "tile" + tileX + "x" + tileY + "y" + zoom + "z.png";
 }
 AppSideService({
   onInit() {
     console.log("app side service invoke onInit");
-    let inbox = transferFile2.getInbox();
-    let outbox = transferFile2.getOutbox();
-    cbFS._mkdir("/assets/map");
+    let inbox = transferFile.getInbox();
+    let outbox = transferFile.getOutbox();
+    // cbFS._mkdir("/assets/map");
     inbox.on("FILE", () => {
       let fileObj = inbox.getNextFile();
       // let buf = new ArrayBuffer(fileObj.fileSize);
@@ -45,7 +45,7 @@ AppSideService({
           });
           downloadTask.onSuccess = async (event) => {
             console.warn("Download tile success!", event);
-            await image2.convert({
+            await image.convert({
               filePath: "assets://map/" + loadFileName,
               targetFilePath: "assets://map/" + loadFileName,
             });
@@ -76,42 +76,27 @@ AppSideService({
           });
           downloadVecTask.onSuccess = async (event) => {
             console.warn("Download Vec Tile success!", event);
-            let downloadCvaTask = network.downloader.downloadFile({
-              url: `http://t0.tianditu.gov.cn/cva_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=${loadInfo.zoom}&TILEROW=${loadInfo.tileY}&TILECOL=${loadInfo.tileX}&tk=7a4866131a483b65961af674d665908d`,
-              filePath: "assets://map/" + "cva" + loadFileName,
-            });
-            downloadCvaTask.onSuccess = async (event) => {
-              console.warn("Download Cva Tile success!", event);
-              await image2._composite({
-                filePath: "assets://map/" + "vec" + loadFileName,
-                srcFilePath: "assets://map/" + "cva" + loadFileName,
-                targetFilePath: "assets://map/" + loadFileName,
-              });
-              console.warn("composite success!");
-              outbox.enqueneFile("assets://map/" + loadFileName).on(
-                "change",
-                /**
-                 *
-                 * @param {import("@cuberqaq/transfer-file-side").ChangeEvent} event
-                 */
-                (event) => {
-                  if (event.data.readyState === "transferring") {
-                    cbFS.rmSync({
-                      path: "assets://map/" + "vec" + loadFileName,
-                    }); 
-                    cbFS.rmSync({
-                      path: "assets://map/" + "cva" + loadFileName,
-                    }); 
-                    cbFS.rmSync({
-                      path: "assets://map/" + loadFileName,
-                    }); 
-                  }
-                }
-              );
-            };
-            downloadCvaTask.onFail = (event) => {
-              console.error("Download Failed!", event);
-            };
+            outbox.enqueneFile("assets://map/" + loadFileName)
+            // .on(
+            //     "change",
+            //     /**
+            //      *
+            //      * @param {import("@cuberqaq/transfer-file-side").ChangeEvent} event
+            //      */
+            //     (event) => {
+            //       if (event.data.readyState === "transferring") {
+            //         cbFS.rmSync({
+            //           path: "assets://map/" + "vec" + loadFileName,
+            //         }); 
+            //         cbFS.rmSync({
+            //           path: "assets://map/" + "cva" + loadFileName,
+            //         }); 
+            //         cbFS.rmSync({
+            //           path: "assets://map/" + loadFileName,
+            //         }); 
+            //       }
+            //     }
+            //   );
 
             // await image.convert({
             //   filePath: "assets://map/" + loadFileName,

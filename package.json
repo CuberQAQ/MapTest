@@ -5,18 +5,14 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@zeppos/device-types": "^2.0.0"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "@cuberqaq/fs-side": "^1.0.5",
-    "@cuberqaq/image-side": "^1.0.2-pre",
-    "@cuberqaq/network-side": "^1.0.2",
     "@cuberqaq/path-polyfill": "^1.0.2",
     "@cuberqaq/transfer-file": "^1.0.4-pre",
-    "@cuberqaq/transfer-file-side": "^1.0.1-pre"
+    "@zeppos/device-types": "^3.0.0"
   }
 }

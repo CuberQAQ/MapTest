@@ -2,8 +2,12 @@ import {
   ChangeEvent,
   Inbox,
   Outbox,
-  TransferFile,
+  type TransferFile as TransferFileType,
 } from "@cuberqaq/transfer-file";
+import _TransferFile from "@zos/transfer-file";
+
+const TransferFile = _TransferFile as typeof TransferFileType;
+
 import { ISingleLoader } from "../../../core/ResourceComponent/SingleLoaderITResource";
 import { ImgPathLike } from "../Renderer/HmImgTileRenderer";
 import path from "@cuberqaq/path-polyfill";
@@ -15,14 +19,14 @@ import { Coordinate } from "../../../core/MapEngine";
 declare const ES6Promise: PromiseConstructor;
 
 export class HmTestSingleLoader implements ISingleLoader<ImgPathLike> {
-  _transferFile: TransferFile;
+  _transferFile: TransferFileType;
   _inbox: Inbox;
   _outbox: Outbox;
   _defer: Defer<{
     resource: ImgPathLike;
     tileX: number;
     tileY: number;
-    zoom: number; 
+    zoom: number;
   }> | null = null;
   _loadingFileName: string | null = null;
   _loadingTile: { tileX: number; tileY: number; zoom: number } | null = null;
@@ -43,12 +47,12 @@ export class HmTestSingleLoader implements ISingleLoader<ImgPathLike> {
           tileY: this._loadingTile!.tileY,
           zoom: this._loadingTile!.zoom,
         });
-        this._defer = null;
+      this._defer = null;
     });
   }
   static getFileName(tileX: number, tileY: number, zoom: number) {
     return "tile" + tileX + "x" + tileY + "y" + zoom + "z.png";
-  } 
+  }
   isLoaded(tileX: number, tileY: number, zoom: number): boolean {
     return !!hmFS.statAssetsSync({
       path: path.join(
