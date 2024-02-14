@@ -26,7 +26,7 @@ Page({
     onGesture({
       callback: (event) => {
         return true;
-      },
+      }, 
     });
     // let transferFile = new TransferFile();
     // hmFS.writeFileSync({

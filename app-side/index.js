@@ -1,15 +1,15 @@
-import { transferFile, _parseHmPath } from "@cuberqaq/transfer-file-side";
+import { transferFile as transferFile2, _parseHmPath } from "@cuberqaq/transfer-file-side";
 import * as cbFS from "@cuberqaq/fs-side";
-import { network } from "@cuberqaq/network-side";
-import { image } from "@cuberqaq/image-side";
+// import { network } from "@cuberqaq/network-side";
+import { image as image2 } from "@cuberqaq/image-side";
 function getFileName(tileX, tileY, zoom) {
   return "tile" + tileX + "x" + tileY + "y" + zoom + "z.png";
 }
 AppSideService({
   onInit() {
     console.log("app side service invoke onInit");
-    let inbox = transferFile.getInbox();
-    let outbox = transferFile.getOutbox();
+    let inbox = transferFile2.getInbox();
+    let outbox = transferFile2.getOutbox();
     cbFS._mkdir("/assets/map");
     inbox.on("FILE", () => {
       let fileObj = inbox.getNextFile();
@@ -45,7 +45,7 @@ AppSideService({
           });
           downloadTask.onSuccess = async (event) => {
             console.warn("Download tile success!", event);
-            await image.convert({
+            await image2.convert({
               filePath: "assets://map/" + loadFileName,
               targetFilePath: "assets://map/" + loadFileName,
             });
@@ -82,7 +82,7 @@ AppSideService({
             });
             downloadCvaTask.onSuccess = async (event) => {
               console.warn("Download Cva Tile success!", event);
-              await image._composite({
+              await image2._composite({
                 filePath: "assets://map/" + "vec" + loadFileName,
                 srcFilePath: "assets://map/" + "cva" + loadFileName,
                 targetFilePath: "assets://map/" + loadFileName,
