@@ -5,14 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
+    "@cuberqaq/cubermapengine": "link:..\\CuberMapEngine\\",
     "@cuberqaq/path-polyfill": "^1.0.2",
     "@cuberqaq/transfer-file": "^1.0.4-pre",
-    "@zeppos/device-types": "^3.0.0"
+    "@cuberqaq/transfer-file-side": "^1.0.1-pre",
+    "@zeppos/device-types": "^3.0.0",
+    "@zeppos/zml": "^0.0.23"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "configVersion": "v2",
+  "configVersion": "v3",
   "app": {
-    "appId": 24881,
+    "appId": 25884,
     "appName": "MapTest",
     "appType": "app",
     "version": {
@@ -11,7 +11,7 @@
     "icon": "icon.png",
     "vender": "Kurashina Asuka",
     "description": "experimental map app"
-  },
+  }, 
   "permissions": [
     "data:os.device.info",
     "device:os.local_storage",
