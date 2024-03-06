@@ -11,7 +11,7 @@
     "icon": "icon.png",
     "vender": "Kurashina Asuka",
     "description": "experimental map app"
-  }, 
+  },
   "permissions": [
     "data:os.device.info",
     "device:os.local_storage",
@@ -29,9 +29,7 @@
     "round": {
       "module": {
         "page": {
-          "pages": [
-            "page/round/home/index.page"
-          ]
+          "pages": ["page/round/home/index.page"]
         },
         "app-side": {
           "path": "app-side/index"
@@ -52,6 +50,18 @@
         {
           "name": "MonacoW",
           "deviceSource": 8519939
+        },
+        {
+          "name": "GTR4A",
+          "deviceSource": 7930112
+        },
+        {
+          "name": "GTR4B",
+          "deviceSource": 7930113
+        },
+        {
+          "name": "GTR4C",
+          "deviceSource": 7864577
         }
       ],
       "designWidth": 480

@@ -14,6 +14,8 @@
     "@cuberqaq/transfer-file": "^1.0.4-pre",
     "@cuberqaq/transfer-file-side": "^1.0.1-pre",
     "@zeppos/device-types": "^3.0.0",
-    "@zeppos/zml": "^0.0.23"
+    "@zeppos/zml": "^0.0.23",
+    "fflate": "^0.8.2",
+    "promisify": "^0.0.3"
   }
 }
